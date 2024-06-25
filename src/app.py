@@ -28,14 +28,21 @@ def get_news():
     for source in NEWS_SOURCES:
         feed = feedparser.parse(source)
         for entry in feed.entries:
-            news_item = {
-                'title': entry.title,
-                'link': entry.link,
-                'source': feed.feed.title,
-                'thumbnail': get_thumbnail(entry.link) 
-            }
-            all_news.append(news_item)
+            # Check if all attributes of entry are not None
+            if all(getattr(entry, attr) is not None for attr in entry.keys()):
+                thumbnail = get_thumbnail(entry.link)
+                if thumbnail is not None:
+                    news_item = {
+                        'title': entry.title,
+                        'link': entry.link,
+                        'source': feed.feed.title,
+                        'thumbnail': thumbnail,
+                        'published': entry.get('published'),
+                        'summary': entry.get('summary')
+                    }
+                    all_news.append(news_item)
     return jsonify(all_news)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
