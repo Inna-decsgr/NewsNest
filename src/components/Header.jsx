@@ -29,12 +29,12 @@ export default function Header() {
       <Link to ='/'>
         <h1 className='text-4xl font-bold text-blue-700'>Newsnest</h1>
       </Link>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='mr-auto flex ml-6'>
         <input
           type="text"
           placeholder='검색어를 입력하세요'
           value={text}
-          className='border border-gray-400 w-80 p-2 pl-2 rounded-tl-md rounded-bl-md'
+          className='border border-gray-400 w-[320px] p-2 pl-2 rounded-tl-md rounded-bl-md'
           onChange={handleChange}
         />
         <button className='bg-blue-700 border border-blue-700 rounded-tr-md rounded-br-md p-2 text-white font-bold'>검색</button>

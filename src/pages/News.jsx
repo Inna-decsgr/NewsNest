@@ -1,25 +1,24 @@
 import React from 'react';
 import { fetchNewsData} from '../api/fetchNewsData';
-import NewsCard from '../components/NewsCard';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
+import NewsHome from '../components/NewsHome';
 
 
-export default function News() {
+export default function Home() {
   const { keyword } = useParams();
-  const { isLoading, error, data: newsdata } = useQuery({ queryKey: ['news', keyword], queryFn: () => fetchNewsData(keyword) });
+  const { isLoading, error, data: newsdata } = useQuery({ queryKey: ['news', keyword], queryFn: () => fetchNewsData(keyword), ...{staleTime: 1000 * 60 * 5}});
 
   return (
     <>
-      {isLoading && <p className='text-lg py-10 font-bold'>기사를 불러오는데 시간이 소요될 수 있습니다. 잠시만 기다려주세요.</p>}
+      {isLoading && <p className='text-lg py-10 font-bold'>ㆍㆍㆍ뉴스를 불러오는데 시간이 소요될 수 있습니다. 잠시만 기다려주세요ㆍㆍㆍ</p>}
       {error && <p>Error: {error.message}</p>}
-      {newsdata && <ul className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 gap-y-4'>
-        {
-          newsdata.map((news, index) => (
-            <NewsCard key={index} news={news} />
-          ))
-        }
-      </ul>}
+      {!isLoading && !error &&newsdata && newsdata.length > 0 && (
+        <NewsHome newsdata={newsdata} />
+      )}
+      {!isLoading && !error && newsdata && newsdata.length === 0 && (
+        <p className='text-lg py-10 font-bold'>{`'${keyword}' 로 검색한 결과가 없습니다`}</p>
+      )}
     </>
   );
 }
