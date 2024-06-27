@@ -25,7 +25,7 @@ export default function Header() {
   }, [keyword])
   
   return (
-    <header className='flex justify-between items-center py-6'>
+    <header className='flex justify-between items-center py-6 px-4'>
       <Link to ='/'>
         <h1 className='text-4xl font-bold text-blue-700'>Newsnest</h1>
       </Link>
