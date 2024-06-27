@@ -8,7 +8,6 @@ from flask_caching import Cache
 app = Flask(__name__)
 CORS(app)
 
-# Flask-Caching 설정
 cache = Cache(app, config={'CACHE_TYPE': 'SimpleCache'})
 
 NEWS_SOURCES = [
@@ -26,7 +25,7 @@ def fetch_thumbnail(link):
         return og_image['content']
     return None
 
-@cache.cached(timeout=3600)  # 1시간 동안 캐시 유지
+@cache.cached(timeout=3600)  
 def fetch_news():
     all_news = []
     for source in NEWS_SOURCES:
