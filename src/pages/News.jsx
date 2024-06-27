@@ -7,7 +7,7 @@ import NewsHome from '../components/NewsHome';
 
 export default function News() {
   const { keyword } = useParams();
-  const { isLoading, error, data: newsdata } = useQuery({ queryKey: ['news', keyword], queryFn: () => fetchNewsData(keyword), ...{staleTime: 1000 * 60} });
+  const { isLoading, error, data: newsdata } = useQuery({ queryKey: ['news', keyword], queryFn: () => fetchNewsData(keyword)});
 
   return (
     <>
