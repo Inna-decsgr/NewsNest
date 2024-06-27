@@ -1,8 +1,9 @@
 import React from 'react';
-import { fetchNewsData} from '../api/fetchNewsData';
+
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import NewsHome from '../components/NewsHome';
+import { fetchNewsData } from '../api/fetchData';
 
 
 export default function News() {

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchNewsByCategory } from '../api/fetchNewsByCategory';
 import NewsCard from '../components/NewsCard';
 import { useQuery } from '@tanstack/react-query';
+import { fetchNewsByCategory } from '../api/fetchData';
 
 
 export default function NewsArticle() {
